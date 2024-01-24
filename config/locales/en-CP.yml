@@ -1,11 +1,11 @@
 ---
 en:
   about:
-    about_mastodon_html: 'The social network of the future: No ads, no corporate surveillance, ethical design, and decentralization! Own your data with Mastodon!'
+    about_mastodon_html: 'The social network of the future: No ads, no corporate surveillance, ethical design, and decentralization! Own your data with Mastodon! Rebel against corpos!'
     contact_missing: Not set
     contact_unavailable: N/A
     hosted_on: Mastodon hosted on %{domain}
-    title: About
+    title: Info datastream
   accounts:
     follow: Follow
     followers:
@@ -15,13 +15,13 @@ en:
     instance_actor_flash: This account is a virtual actor used to represent the server itself and not any individual user. It is used for federation purposes and should not be suspended.
     last_active: last active
     link_verified_on: Ownership of this link was checked on %{date}
-    nothing_here: There is nothing here!
+    nothing_here: There is nothing here, choom!
     pin_errors:
       following: You must be already following the person you want to endorse
     posts:
-      one: Post
-      other: Posts
-    posts_tab_heading: Posts
+      one: Transmission
+      other: Transmissions
+    posts_tab_heading: Transmissions
   admin:
     account_actions:
       action: Perform action
@@ -1038,7 +1038,7 @@ en:
     apply_for_account: Request an account
     captcha_confirmation:
       help_html: If you have issues solving the CAPTCHA, you can get in touch with us through %{email} and we can assist you.
-      hint_html: Just one more thing! We need to confirm you're a human (this is so we can keep the spam out!). Solve the CAPTCHA below and click "Continue".
+      hint_html: Just one more thing! We need to confirm you're a human (this is so we can keep the spam and rogue AIs out!). Solve the CAPTCHA below and click "Continue".
       title: Security check
     confirmations:
       awaiting_review: Your e-mail address is confirmed! The %{domain} staff is now reviewing your registration. You will receive an e-mail if they approve your account!
@@ -1196,8 +1196,8 @@ en:
     other: Other
   errors:
     '400': The request you submitted was invalid or malformed.
-    '403': You don't have permission to view this page.
-    '404': The page you are looking for isn't here.
+    '403': You don't have permission to view this page. Netwatch has logged this accident.
+    '404': You've ventured too deep into the Net, there is nothing here, choom.
     '406': This page is not available in the requested format.
     '410': The page you were looking for doesn't exist here anymore.
     '422':
@@ -1205,7 +1205,7 @@ en:
       title: Security verification failed
     '429': Too many requests
     '500':
-      content: We're sorry, but something went wrong on our end.
+      content: We're sorry, but our Net infrastructure seems to malfunction.
       title: This page is not correct
     '503': The page could not be served due to a temporary server failure.
     noscript_html: To use the Mastodon web application, please enable JavaScript. Alternatively, try one of the <a href="%{apps_path}">native apps</a> for Mastodon for your platform.
@@ -1230,7 +1230,7 @@ en:
   featured_tags:
     add_new: Add new
     errors:
-      limit: You have already featured the maximum number of hashtags
+      limit: You have already featured the maximum number of tags, choomba
     hint_html: "<strong>Feature your most important hashtags on your profile.</strong> A great tool for keeping track of your creative works and long-term projects, featured hashtags are displayed prominently on your profile and allow quick access to your own posts."
   filters:
     contexts:
