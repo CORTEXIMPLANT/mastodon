@@ -222,6 +222,7 @@ module LanguagesHelper
   # regional variants specifically
   REGIONAL_LOCALE_NAMES = {
     'en-GB': 'English (British)',
+    'en-CP': 'English (Cyberpunk)', # Cyberpunk custom locale
     'es-AR': 'Español (Argentina)',
     'es-MX': 'Español (México)',
     'fr-CA': 'Français (Canadien)',
