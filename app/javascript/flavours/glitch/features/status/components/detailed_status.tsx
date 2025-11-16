@@ -86,13 +86,6 @@ export const DetailedStatus: React.FC<{
   const nodeRef = useRef<HTMLDivElement>();
   const { signedIn } = useIdentity();
 
-  const rewriteMentions = useAppSelector(
-    (state) => state.local_settings.get('rewrite_mentions', false) as boolean,
-  );
-  const tagMisleadingLinks = useAppSelector(
-    (state) =>
-      state.local_settings.get('tag_misleading_links', false) as boolean,
-  );
   const letterboxMedia = useAppSelector(
     (state) =>
       state.local_settings.getIn(['media', 'letterbox'], false) as boolean,
@@ -101,6 +94,8 @@ export const DetailedStatus: React.FC<{
     (state) =>
       state.local_settings.getIn(['media', 'fullwidth'], false) as boolean,
   );
+
+  const { signedIn } = useIdentity();
 
   const handleOpenVideo = useCallback(
     (options: VideoModalOptions) => {
@@ -155,6 +150,7 @@ export const DetailedStatus: React.FC<{
   let media;
   let applicationLink;
   let reblogLink;
+  let quotesLink;
   let attachmentAspectRatio;
 
   if (properStatus.get('media_attachments').getIn([0, 'type']) === 'video') {
@@ -331,6 +327,39 @@ export const DetailedStatus: React.FC<{
     );
   }
 
+  if (['private', 'direct'].includes(status.get('visibility') as string)) {
+    quotesLink = '';
+  } else if (signedIn) {
+    quotesLink = (
+      <Link
+        to={`/@${status.getIn(['account', 'acct'])}/${status.get('id')}/quotes`}
+        className='detailed-status__link'
+      >
+        <span className='detailed-status__quotes'>
+          <AnimatedNumber value={status.get('quotes_count')} />
+        </span>
+        <FormattedMessage
+          id='status.quotes'
+          defaultMessage='{count, plural, one {quote} other {quotes}}'
+          values={{ count: status.get('quotes_count') }}
+        />
+      </Link>
+    );
+  } else {
+    quotesLink = (
+      <span className='detailed-status__link'>
+        <span className='detailed-status__quotes'>
+          <AnimatedNumber value={status.get('quotes_count')} />
+        </span>
+        <FormattedMessage
+          id='status.quotes'
+          defaultMessage='{count, plural, one {quote} other {quotes}}'
+          values={{ count: status.get('quotes_count') }}
+        />
+      </span>
+    );
+  }
+
   const favouriteLink = (
     <Link
       to={`/@${status.getIn(['account', 'acct'])}/${status.get('id')}/favourites`}
@@ -400,25 +429,19 @@ export const DetailedStatus: React.FC<{
           />
         )}
 
-        {status.get('spoiler_text').length > 0 &&
-          (!matchedFilters || showDespiteFilter) && (
-            <ContentWarning
-              text={
-                status.getIn(['translation', 'spoilerHtml']) ||
-                status.get('spoilerHtml')
-              }
-              expanded={expanded}
-              onClick={handleExpandedToggle}
-            />
-          )}
+        {(!matchedFilters || showDespiteFilter) && (
+          <ContentWarning
+            status={status}
+            expanded={expanded}
+            onClick={handleExpandedToggle}
+          />
+        )}
 
         {expanded && (
           <>
             <StatusContent
               status={status}
               onTranslate={handleTranslate}
-              tagLinks={tagMisleadingLinks}
-              rewriteMentions={rewriteMentions}
               {...(statusContentProps as any)}
             />
 
@@ -426,7 +449,10 @@ export const DetailedStatus: React.FC<{
             {hashtagBar}
 
             {status.get('quote') && (
-              <QuotedStatus quote={status.get('quote')} />
+              <QuotedStatus
+                quote={status.get('quote')}
+                parentQuotePostId={status.get('id')}
+              />
             )}
           </>
         )}
@@ -478,6 +504,8 @@ export const DetailedStatus: React.FC<{
           <div className='detailed-status__meta__line'>
             {reblogLink}
             {reblogLink && <>·</>}
+            {quotesLink}
+            {quotesLink && <>·</>}
             {favouriteLink}
           </div>
         </div>
