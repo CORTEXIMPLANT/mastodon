@@ -186,6 +186,7 @@ export const connectCommunityStream = ({ onlyMedia } = {}) =>
  * @returns {function(): void}
  */
 export const connectBubbleStream = ({ onlyMedia } = {}) =>
+  // @ts-expect-error
   connectTimelineStream(`bubble${onlyMedia ? ':media' : ''}`, `public:bubble${onlyMedia ? ':media' : ''}`, {}, { fillGaps: () => (fillBubbleTimelineGaps({ onlyMedia })) });
 
 /**
